@@ -1,6 +1,8 @@
 using LeaveManagementSystem.Data;
+using LeaveManagementSystem.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,9 +12,13 @@ builder.Services.AddDbContext<LeaveManagementDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<LeaveManagementDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly()); // Scan entire assembly and look for automapper profiles
+builder.Services.AddScoped<ILeaveTypesService, LeaveTypesService>();
 
 var app = builder.Build();
 

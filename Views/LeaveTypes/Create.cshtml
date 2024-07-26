@@ -1,4 +1,5 @@
-﻿@model LeaveManagementSystem.Data.LeaveType
+﻿@using LeaveManagementSystem.Models.LeaveTypes
+@model LeaveTypeCreateVM
 
 @{
     ViewData["Title"] = "Create";
@@ -13,9 +14,9 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="LeaveTypeName" class="control-label"></label>
-                <input asp-for="LeaveTypeName" class="form-control" />
-                <span asp-validation-for="LeaveTypeName" class="text-danger"></span>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="NumberOfDays" class="control-label"></label>
